@@ -13,7 +13,7 @@ from transformers import LlamaForCausalLM, LlamaTokenizer, TextStreamer
 
 
 start_time = time.time()
-model_dir = "./llama-2-7b-chat-hf"
+model_dir = "/home/mcwaiteam/TinyLlama-1.1B-Chat-v0.6"
 
 print(1)
 model = LlamaForCausalLM.from_pretrained(model_dir)  #### Loading checkpoint shards:---> starts here
@@ -34,7 +34,7 @@ print("start_tokenization_time",start_tokenization_time)
 # generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300, streamer=streamer)  #3 for streaming 
 # generate_ids,token_time_list = model.generate(inputs.input_ids, max_new_tokens=10, do_sample=True,num_beams=4)
 # generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300, do_sample=True,num_beams=4)  # beam search multinomial sampling
-generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300) # greedy search
+generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300, num_beams=4) # greedy search
 # generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300, do_sample=True) # multinomial sampling
 # generate_ids,token_time_list = model.generate(inputs.input_ids, max_length=300, penalty_alpha=0.6, top_k=4) # contrastive search
 
@@ -59,4 +59,5 @@ end_time = time.time()
 print("Number of tokens:", num_tokens)
 print("Time taken for tokenization (seconds):", tokenization_time)
 print("Tokens per second:", tokens_per_second)
+print("Token time of all tokens: ", token_time_list)
 print("Total inference time :", end_time - start_time)
