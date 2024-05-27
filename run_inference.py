@@ -58,7 +58,6 @@ if __name__ == "__main__":
     # prompt = "Give me some places to visit on vacation?"
     prompt_str = ' '
     ip_words = int(sys.argv[1])
-
     for i in range(0, 5):
         prompt = prompt_str.join(words_list[:ip_words])
         tokenization_start_time = time.time()
