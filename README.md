@@ -15,7 +15,7 @@ source <envpath>/bin/activate
 
 
 ```bash
-git clone 
+git clone -b torch_profiler https://github.com/sudhir-mcw/llm.git
 cd llm
 pip install -r requirements.txt
 ```
@@ -25,8 +25,8 @@ Place the model just outside llm repo
 
 ```bash
 cd <to_folder_outside_llm_repo>
-wget
-unzip
+wget https://drive.google.com/file/d/1ny1GhyIvT-hPoad3ROewgqQ5YsrGWZ8f/view?usp=drive_link
+unzip TinyLlama-1.1B-Chat-v0.6.zip
 ```
 
 ## Run
