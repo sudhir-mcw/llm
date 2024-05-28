@@ -106,7 +106,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("Input words is not specified by defaut taking as 1000")
         sys.argv.append("1000")
-    elif len(sys.argv) == 2 and sys.argv[1] > 40000:
+    elif len(sys.argv) == 2 and int(sys.argv[1]) > 40000:
         print("Input words exceeds max limit, so limiting to 40000")
         sys.argv[1] = "40000"
     if os.path.exists(r"./exp-logs/preprocess"):
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     # prompt = "Give me some places to visit on vacation?"
     prompt_str = ' '
     ip_words = int(sys.argv[1])
-    n_cycle = 5
+    n_cycle = 3
     for i in range(0, n_cycle):
         prompt = prompt_str.join(words_list[:ip_words])
         tokenized_inputs = preprocess(tokenizer, prompt)
