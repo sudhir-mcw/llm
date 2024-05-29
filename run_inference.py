@@ -36,7 +36,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("Input words is not specified by default taking as 1000")
         sys.argv.append("1000")
-    elif len(sys.argv) == 2 and sys.argv[1] > 40000:
+    elif len(sys.argv) == 2 and int(sys.argv[1]) > 40000:
         print("Input words should be less than 40000, so running for max limit 40000")
         sys.argv[1] = ("40000")
     model = load_model()
