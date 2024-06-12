@@ -7,6 +7,7 @@ import urllib.request
 import time
 from statistics import mean
 import sys
+import timeit
 
 def load_model(model_dir=None):
     if not model_dir:
@@ -60,9 +61,11 @@ if __name__ == "__main__":
     ip_words = int(sys.argv[1])
     for i in range(0, 5):
         prompt = prompt_str.join(words_list[:ip_words])
-        tokenization_start_time = time.time()
+        # tokenization_start_time = time.time()
+        tokenization_start_time = timeit.default_timer()
         tokenized_inputs = preprocess(tokenizer, prompt)
-        tokenization_end_time = time.time()
+        # tokenization_end_time = time.time()
+        tokenization_end_time = timeit.default_timer()
         pre_time.append(((tokenization_end_time-tokenization_start_time)*1000)/ip_words)
         pre_total.append(((tokenization_end_time-tokenization_start_time)*1000))
         no_tokens = tokenized_inputs["input_ids"].shape[1]
@@ -70,10 +73,12 @@ if __name__ == "__main__":
         WT_ratio.append(ip_words/no_tokens)
         TPS.append(no_tokens/(tokenization_end_time-tokenization_start_time))
 
-        postprocess_start_time = time.time()
+        # postprocess_start_time = time.time()
+        postprocess_start_time = timeit.default_timer()
         postprocessed_output = postprocess(tokenizer,tokenized_inputs['input_ids'])
+        # postprocess_end_time = time.time()
+        postprocess_end_time = timeit.default_timer()
 
-        postprocess_end_time = time.time()
         op_list = postprocessed_output.split(" ")
         no_of_words = len(op_list)
         pro_time.append(((postprocess_end_time-postprocess_start_time)*1000)/no_tokens)
