@@ -12,9 +12,9 @@ import os
 import json
 import codecs
 import sys
-from memory_profiler import profile
+# from memory_profiler import profile
 from guppy import hpy
-# from filprofiler.api import profile
+from filprofiler.api import profile
 PROFILE = True
 
 
@@ -29,10 +29,9 @@ def load_tokenizer(model_dir=None):
     tokenizer = LlamaTokenizer.from_pretrained(model_dir)
     return tokenizer
 
-@profile(precision=4)
 def preprocess(tokenizer,prompt):
-    # inputs = profile(lambda: tokenizer(prompt, return_tensors="pt"), "./tmp/fil-result_preprocess")
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = profile(lambda: tokenizer(prompt, return_tensors="pt"), "./tmp/fil-result_preprocess")
+    # inputs = tokenizer(prompt, return_tensors="pt")
     return inputs
 
 
@@ -40,10 +39,10 @@ def inference(model,tokenized_inputs):
     generate_ids, timings = model.generate(tokenized_inputs.input_ids, max_length=50, num_beams=4)
     return generate_ids, timings
 
-# @profile
 def postprocess(tokenizer,generated_ids):
-    output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-    return output
+    output = profile(lambda: tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0], "./tmp/fil-result_postprocess")
+    # output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+    return output[0]
 
 def profiler():
     pre_process_cpu_times = []
@@ -114,29 +113,9 @@ if __name__ == "__main__":
     n_cycle = 2
     for i in range(0, n_cycle):
         prompt = prompt_str.join(words_list[:ip_words])
-        # print(type(h.heap()))
-        # h.setrelheap()
-        # print("before heap: ", h.heap())
+
         tokenized_inputs = preprocess(tokenizer, prompt)
-        # heapinfo = h.heap()
-        # # print(heapinfo.bytype)
-        # byrcs = heapinfo.byrcs
-        # print("heap: ", heapinfo)
-        # print(byrcs)
-        # # i = iter(byrcs.nodes)
-        # # for val in i:
-        # a = re.search(r'\b(Total size = )\b', str(byrcs))
-        # byt = re.search(r'\b( bytes)\b', str(byrcs))
-        # print(a.start())
-        # print(a.end())
-        # print(byt.start())
-        # # print("val: ", str(val))
-        # total_size = str(byrcs)[a.end():byt.start()]
-        # print("total size = ", int(total_size.replace(" ", "")))
-        # heap_memory.append(int(total_size.replace(" ", "")))
-        # print(byrcs[4].byclodo)
-        # print(byrcs[4].byid)
-        # print("\n byrcs[4].byvia: ", byrcs[4].byvia)
+
         no_tokens = tokenized_inputs["input_ids"].shape[1]
         gen_token.append(no_tokens)
         postprocessed_output = postprocess(tokenizer,tokenized_inputs['input_ids'])
@@ -148,17 +127,3 @@ if __name__ == "__main__":
     print("input words: ", ip_words,)
     print("ip token to post proc: ", mean(gen_token))
     print("op words: ", mean(gen_words))
-    # print("Memory 1st iter: ", heap_memory[0])
-    # print("Memory avg of remaining: ", mean(heap_memory[1:]))
-    # preprocess_time, postprocess_time = profiler()
-    # wt_ratio = round(ip_words/mean(gen_token), 3)
-    # tps = round(mean(gen_token)/(preprocess_time/1000), 2)
-    # tw_ratio = round(mean(gen_token)/mean(gen_words), 3)
-    # wps = round(mean(gen_words)/(postprocess_time/1000), 2)
-    # print("\n Preprocess time per token: ", round(preprocess_time/mean(gen_token), 4))
-    # print("WT ratio: ", wt_ratio)
-    # print("Tokens per sec: ", tps)
-    # print("\nPost process time per token: ", round(postprocess_time/mean(gen_words), 4))
-    # print("TW ratio: ", tw_ratio)
-    # print("Words per sec: ", wps)
-    # print("\n")
