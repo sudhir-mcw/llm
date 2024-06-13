@@ -84,7 +84,7 @@ def profiler():
     return mean(pre_process_cpu_times)/1000, mean(post_process_cpu_times)/1000
 
 if __name__ == "__main__":
-    h = hpy()
+    # h = hpy()
     if len(sys.argv) == 1:
         print("Input words is not specified by defaut taking as 1000")
         sys.argv.append("1000")
