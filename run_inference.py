@@ -39,12 +39,12 @@ def profile(func):
 
 def load_model(model_dir=None):
     if not model_dir:
-        model_dir  = "/home/mcwaiteam/TinyLlama-1.1B-Chat-v0.6"
+        model_dir  = "../TinyLlama-1.1B-Chat-v0.6"
     model = LlamaForCausalLM.from_pretrained(model_dir)  #### Loading checkpoint shards:---> starts here
     return model
 def load_tokenizer(model_dir=None):
     if not model_dir:
-        model_dir  = "/home/mcwaiteam/TinyLlama-1.1B-Chat-v0.6"
+        model_dir  = "../TinyLlama-1.1B-Chat-v0.6"
     tokenizer = LlamaTokenizer.from_pretrained(model_dir)
     return tokenizer
 

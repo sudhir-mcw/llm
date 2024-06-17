@@ -3,11 +3,11 @@
 This project profiles the pre/post processing of LLM model using Torch Profiler
 
 ## Prerequisite
-Install python 3.12
+Install python 3.10
 
 Create a virtual environment 
 ```
-venv <path_to_python3.12> <env_name>
+venv <path_to_python3.10> <env_name>
 source <envpath>/bin/activate
 ```
 
