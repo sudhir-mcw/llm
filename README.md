@@ -1,6 +1,6 @@
 # LLM Pre/Post processing
 
-This project profiles the pre/post processing of LLM model using Torch Profiler
+This project run inference for LLM model and profiles for TTFT
 
 ## Prerequisite
 Install python 3.10
