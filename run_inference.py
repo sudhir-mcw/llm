@@ -13,7 +13,6 @@ import json
 import codecs
 import sys
 # from memory_profiler import profile
-from guppy import hpy
 from filprofiler.api import profile
 PROFILE = True
 
@@ -84,7 +83,6 @@ def profiler():
     return mean(pre_process_cpu_times)/1000, mean(post_process_cpu_times)/1000
 
 if __name__ == "__main__":
-    # h = hpy()
     if len(sys.argv) == 1:
         print("Input words is not specified by defaut taking as 1000")
         sys.argv.append("1000")

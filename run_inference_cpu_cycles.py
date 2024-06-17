@@ -2,7 +2,6 @@ import torch
 import transformers
 import time
 from transformers import LlamaForCausalLM, LlamaTokenizer, TextStreamer
-# import psutil
 import re
 import urllib.request
 import time
@@ -19,7 +18,6 @@ import io
 import timeit
 from pyperf import perf_counter , Runner
 import random
-# from filprofiler.api import profile
 PROFILE = True
 
 

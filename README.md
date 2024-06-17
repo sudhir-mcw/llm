@@ -1,13 +1,19 @@
 # LLM Pre/Post processing
 
-This project profiles the pre/post processing of LLM model using Torch Profiler
+This project profiles Memory and CPU metrics of the pre/post processing of LLM model
+
+## Machice Requirements
+- Arch: x86_64 or arm64
+- OS  : Ubuntu 18 to 22
+- RAM : Min 6Gb
+- ROM : Min 64Gb
 
 ## Prerequisite
-Install python 3.12
+Install python 3.10
 
 Create a virtual environment 
 ```
-venv <path_to_python3.12> <env_name>
+venv <path_to_python3.10> <env_name>
 source <envpath>/bin/activate
 ```
 
@@ -67,13 +73,9 @@ Above options give different reports for visualization
 
 ## Run ( CPU Profiler)
 
-
-
->Change ip_words and operation inputs under the main() of run_inference_cpu_cycles.py
-
-> ip_words: 1 - 40000
-
-> operation: preprocess/postprocess
+- Change ip_words and operation inputs under the main() of run_inference_cpu_cycles.py
+- ip_words: 1 - 40000
+- operation: preprocess/postprocess
 
 ```
 cd llm
