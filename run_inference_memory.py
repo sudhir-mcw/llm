@@ -28,8 +28,8 @@ def load_tokenizer(model_dir=None):
     return tokenizer
 
 def preprocess(tokenizer,prompt):
-    inputs = profile(lambda: tokenizer(prompt, return_tensors="pt"), "./tmp/fil-result_preprocess")
-    # inputs = tokenizer(prompt, return_tensors="pt")
+    # inputs = profile(lambda: tokenizer(prompt, return_tensors="pt"), "./tmp/fil-result_preprocess")
+    inputs = tokenizer(prompt, return_tensors="pt")
     return inputs
 
 
@@ -38,8 +38,8 @@ def inference(model,tokenized_inputs):
     return generate_ids, timings
 
 def postprocess(tokenizer,generated_ids):
-    output = profile(lambda: tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0], "./tmp/fil-result_postprocess")
-    # output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+    # output = profile(lambda: tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0], "./tmp/fil-result_postprocess")
+    output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
     return output[0]
 
 def profiler():
