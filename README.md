@@ -21,7 +21,7 @@ source <envpath>/bin/activate
 
 
 ```bash
-git clone -b torch_profiler https://github.com/sudhir-mcw/llm.git
+git clone -b mem_profiler https://github.com/sudhir-mcw/llm.git
 cd llm
 pip install -r requirements.txt
 ```
