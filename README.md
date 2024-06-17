@@ -2,6 +2,12 @@
 
 This project run inference for LLM model and profiles for TTFT
 
+## Machice Requirements
+- Arch: x86_64 or arm64
+- OS  : Ubuntu 18 to 22
+- RAM : Min 6Gb
+- ROM : Min 64Gb
+
 ## Prerequisite
 Install python 3.10
 
